@@ -30,5 +30,5 @@ PORT = 8080
 Handler = GzipHTTPRequestHandler
 
 httpd = socketserver.TCPServer(("0.0.0.0", PORT), Handler)
-print(f"Serving Unity WebGL on http://localhost:{PORT}")
+print(f"Serving Unity WebGL on http://0.0.0.0:{PORT}")
 httpd.serve_forever()
