@@ -1,6 +1,7 @@
 import http.server
 import socketserver
 import os
+import argparse
 
 WEBGL_BUILD_DIRECTORY = "."
 
@@ -26,9 +27,14 @@ class GzipHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 os.chdir(WEBGL_BUILD_DIRECTORY)
 
-PORT = 8080
-Handler = GzipHTTPRequestHandler
+parser = argparse.ArgumentParser(description="Serve Unity WebGL build over HTTP.")
+parser.add_argument('--port', type=int, default=8080, help="Port to run the server on (default: 8080)")
+args = parser.parse_args()
 
+PORT = args.port
+
+Handler = GzipHTTPRequestHandler
 httpd = socketserver.TCPServer(("0.0.0.0", PORT), Handler)
+
 print(f"Serving Unity WebGL on http://0.0.0.0:{PORT}")
 httpd.serve_forever()
