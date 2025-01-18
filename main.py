@@ -29,6 +29,6 @@ os.chdir(WEBGL_BUILD_DIRECTORY)
 PORT = 8080
 Handler = GzipHTTPRequestHandler
 
-httpd = socketserver.TCPServer(("", PORT), Handler)
+httpd = socketserver.TCPServer(("0.0.0.0", PORT), Handler)
 print(f"Serving Unity WebGL on http://localhost:{PORT}")
 httpd.serve_forever()
